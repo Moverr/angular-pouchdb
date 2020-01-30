@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {PouchDBServiceService} from '../pouch-dbservice.service'
 
 @Component({
   selector: 'app-pouchdb',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PouchdbComponent implements OnInit {
 
-  constructor() { }
+    pouchdbservice :PouchDBServiceService;
+
+  constructor() { 
+     
+  }
 
   ngOnInit() {
   }
 
+  syncData(){
+    this.pouchdbservice
+    .sync()
+    .then();
+  }
 }
