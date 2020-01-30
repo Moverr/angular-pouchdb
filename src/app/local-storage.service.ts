@@ -1,3 +1,4 @@
+import { Injectable } from '@angular/core';
 
 interface ICache {
 	[ key: string ]: any
@@ -12,6 +13,9 @@ interface ICache {
 // shared values. This means that mutations to a returned value may or may not be 
 // observed in other parts of the code. It is advised that you DO NOT DIRECTLY MUTATE
 // the values passed-to or returned-from this service.
+@Injectable({
+	providedIn: 'root',
+})
 export class LocalStorageService {
 
 	private cache: ICache;

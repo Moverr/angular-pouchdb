@@ -1,6 +1,7 @@
 // Import the core angular services.
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
+import * as PouchDB from "pouchdb";
 
 // Import RxJS modules for "side effects".
 import "rxjs/add/observable/of";
@@ -14,7 +15,47 @@ export interface IFriend {
   name: string;
 }
 
-@Injectable()
+
+interface IPouchDBAllDocsResult {
+	offset: number;
+	total_rows: number;
+	rows: IPouchDBRow[];
+}
+
+interface IPouchDBGetResult {
+	_id: string;
+	_rev: string;
+}
+
+interface IPouchDBPutResult {
+	ok: boolean;
+	id: string;
+	rev: string;
+}
+
+interface IPouchDBRemoveResult {
+	ok: boolean;
+	id: string;
+	rev: string;
+}
+
+interface IPouchDBRow {
+	id: string;
+	key: string;
+	value: { rev: string };
+
+	// Only included if include_docs is set to true during query.
+	doc?: any; 
+}
+
+interface IPouchDBGetFriendResult extends IPouchDBGetResult {
+	name: string;
+}
+
+
+@Injectable({
+	providedIn: 'root',
+})
 export class FriendService {
   private localStorageService: LocalStorageService;
 
