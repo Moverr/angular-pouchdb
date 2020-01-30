@@ -102,6 +102,7 @@ export class FriendService {
 
 		return( friends || [] );
 
+		
 	}
 
 }
