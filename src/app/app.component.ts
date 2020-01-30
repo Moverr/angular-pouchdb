@@ -83,7 +83,8 @@ export class AppComponent implements OnInit {
   // I get called once after the component has been initialized and the inputs have
   // been bound for the first time.
   public ngOnInit(): void {
-    this.loadFriends();
+	// this.loadFriends();
+	this.loadF_riends();
   }
 
   // I process the "add" form, creating a new friend with the given name.
@@ -99,7 +100,7 @@ export class AppComponent implements OnInit {
         (id: string): void => {
           console.log("New friend added:", id);
 
-          this.loadFriends();
+          this.loadF_riends();
           this.addForm.name = "";
         },
         (error: Error): void => {

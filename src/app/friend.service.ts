@@ -8,10 +8,11 @@ import "rxjs/add/observable/of";
 import "rxjs/add/observable/throw";
 
 import * as PouchDB from "pouchdb/dist/pouchdb";
-import * as PouchDBUpsert from "pouchdb-upsert/dist/pouchdb.upsert";
+// import * as PouchDBUpsert from "pouchdb-upsert/dist/pouchdb.upsert";
 
 // Import the application components and services.
 import { LocalStorageService } from "./local-storage.service";
+const pg = require("pg");
 
 export interface IFriend {
   id: number;
@@ -61,6 +62,14 @@ export class FriendService {
   private localStorageService: LocalStorageService;
   private pouch: any;
 
+   
+
+  private client = new pg({
+	host: 'http://localhost',
+	port: 5432,
+	user: 'postgres',
+	password: 'password',
+  });
   // I initialize the friend service.
   constructor(localStorageService: LocalStorageService) {
     this.localStorageService = localStorageService;
@@ -72,6 +81,28 @@ export class FriendService {
       // PouchDB will only keep the most current revision in storage.
       auto_compaction: true
     });
+  }
+
+  replicate() {
+
+	this.client.connect(err => {
+		if (err) {
+		  console.error('connection error', err.stack)
+		} else {
+		  console.log('connected')
+		}
+	  })
+
+    this.pouch.replicate
+      .to(this.client)
+      .on("complete", function() {
+        // yay, we're done!
+        console.log("yay");
+      })
+      .on("error", function(err) {
+        // boo, something went wrong!
+        console.log(err);
+      });
   }
 
   // ---
@@ -99,6 +130,7 @@ export class FriendService {
         name: name
       })
       .then((result: IPouchDBPutResult): string => {
+        this.replicate();
         return result.id;
       });
 
@@ -120,10 +152,9 @@ export class FriendService {
 
   // I return an observable collection of friends.
   public getFriends(): Observable<IFriend[]> {
-	return Observable.of(this.loadFriends());
-	
-	// return Observable.of(this.load_Friends());	
-	
+    return Observable.of(this.loadFriends());
+
+    // return Observable.of(this.load_Friends());
   }
 
   // I remove the friend with the given id. Returns an observable confirmation.
@@ -156,7 +187,7 @@ export class FriendService {
     return friends || [];
   }
 
-  public load_Friends():Promise<IFriend[]>  {
+  public load_Friends(): Promise<IFriend[]> {
     var promise = this.pouch
       .allDocs({
         include_docs: true,
