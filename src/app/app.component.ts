@@ -7,8 +7,10 @@ import { OnInit } from "@angular/core";
 import { FriendService } from "./friend.service";
 import { IFriend } from "./friend.service";
 
+import 'rxjs/add/operator/toPromise';
+
 interface IEditForm {
-	id: string;
+	id: number;
 	name: string;
 };
 
@@ -112,7 +114,7 @@ export class AppComponent implements OnInit {
 		}
 
 		this.friendService
-			.addFriend( this.addForm.name )
+			.createFriend( this.addForm.name )
 			.then(
 				( id: string ) : void => {
 
@@ -145,7 +147,7 @@ export class AppComponent implements OnInit {
 			
 		}
 
-		this.friendService
+		/*this.friendService
 			.updateFriend( this.editForm.id, this.editForm.name )
 			.then(
 				() : void => {
@@ -161,7 +163,8 @@ export class AppComponent implements OnInit {
 
 				}
 			)
-		;
+		;  */
+
 
 	}
 
