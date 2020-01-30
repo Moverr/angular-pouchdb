@@ -17,9 +17,5 @@ export class PouchdbComponent implements OnInit {
   ngOnInit() {
   }
 
-  syncData(){
-    this.pouchdbservice
-    .sync()
-    .then();
-  }
+   
 }
