@@ -122,10 +122,10 @@ export class AppComponent implements OnInit {
 		}
 
 		this.friendService
-			.createFriend( this.addForm.name )
-			.toPromise()
+			.addFriend( this.addForm.name )
+			 
 			.then(
-				( id: number ) : void => {
+				( id: string ) : void => {
 
 					console.log( "New friend added:", id );
 

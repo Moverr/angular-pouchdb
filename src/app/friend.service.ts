@@ -1,11 +1,15 @@
 // Import the core angular services.
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
-import * as PouchDB from "pouchdb";
+// import * as PouchDB from "pouchdb";
 
 // Import RxJS modules for "side effects".
 import "rxjs/add/observable/of";
 import "rxjs/add/observable/throw";
+
+import * as PouchDB from 'pouchdb/dist/pouchdb';
+import * as PouchDBUpsert from 'pouchdb-upsert/dist/pouchdb.upsert';
+
 
 // Import the application components and services.
 import { LocalStorageService } from "./local-storage.service";
