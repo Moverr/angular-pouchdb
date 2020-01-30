@@ -3,15 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PouchdbComponent } from './pouchdb/pouchdb.component';
 
 
-const routes: Routes = [
-  // {
-  //   path:'',redirectTo:'/pouchdb',pathMatch:'full'
-  // },
-  {
-    path:'', component: PouchdbComponent
-  },
-  
-];
+const routes: Routes = [];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

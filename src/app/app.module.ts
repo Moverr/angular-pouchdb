@@ -7,8 +7,7 @@ import { PouchdbComponent } from './pouchdb/pouchdb.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    PouchdbComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
