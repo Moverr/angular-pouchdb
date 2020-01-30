@@ -12,8 +12,7 @@ import * as PouchDB from "pouchdb/dist/pouchdb";
 
 // Import the application components and services.
 import { LocalStorageService } from "./local-storage.service";
-import pg from 'pg-client';
-
+ 
 
 export interface IFriend {
   id: number;
@@ -62,7 +61,7 @@ interface IPouchDBGetFriendResult extends IPouchDBGetResult {
 export class FriendService {
   private localStorageService: LocalStorageService;
   private pouch: any;
-
+private pg;
    
 
   private client = new pg({
@@ -131,7 +130,7 @@ export class FriendService {
         name: name
       })
       .then((result: IPouchDBPutResult): string => {
-        this.replicate();
+        // this.replicate();
         return result.id;
       });
 
