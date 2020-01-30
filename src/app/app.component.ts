@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
 	public deleteFriend( friend: IFriend ) : void {
 
 		this.friendService
-			.deleteFriend( friend.id )
+			.removeFriend( friend.id )
 			.then(
 				() : void => {
 
