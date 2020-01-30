@@ -58,10 +58,24 @@ interface IPouchDBGetFriendResult extends IPouchDBGetResult {
 })
 export class FriendService {
   private localStorageService: LocalStorageService;
+  private pouch: any;
+
 
   // I initialize the friend service.
   constructor(localStorageService: LocalStorageService) {
-    this.localStorageService = localStorageService;
+	this.localStorageService = localStorageService;
+	
+	this.pouch = new PouchDB( 
+		"javascript-demos-pouchdb-angular2",
+		{
+			// PouchDB doesn't overwrite data - it creates revisions (like Git). 
+			// For the purposes of this app, however, we don't need those revisions
+			// to stay around, taking up storage space. By enabling auto_compaction,
+			// PouchDB will only keep the most current revision in storage.
+			auto_compaction: true
+		}
+	);
+
   }
 
   // ---
@@ -80,6 +94,29 @@ export class FriendService {
     return friends;
   }
 
+  public addFriend( name: string ) : Promise<string> {
+
+	// NOTE: All friends are given the key-prefix of "friend:". This way, when we go
+	// to query for friends, we can limit the scope to keys with in this key-space.
+	var promise = this.pouch
+		.put({
+			_id: ( "friend:" + ( new Date() ).getTime() ),
+			name: name
+		})
+		.then(
+			( result: IPouchDBPutResult ) : string => {
+
+				return( result.id );
+
+			}
+		)
+	;
+
+	return( promise );
+
+}
+  
+
   // I create a new friend with the given name and return the new observable id.
   public createFriend(name: string): Observable<number> {
     var friends = this.loadFriends();
@@ -92,6 +129,7 @@ export class FriendService {
 
     return Observable.of(friend.id);
   }
+
 
   // I return an observable collection of friends.
   public getFriends(): Observable<IFriend[]> {
