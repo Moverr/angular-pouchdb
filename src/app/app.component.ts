@@ -58,6 +58,7 @@ export class AppComponent implements OnInit {
 
 		this.friendService
 			.removeFriend( friend.id )
+			.toPromise()
 			.then(
 				() : void => {
 
@@ -115,6 +116,7 @@ export class AppComponent implements OnInit {
 
 		this.friendService
 			.createFriend( this.addForm.name )
+			.toPromise()
 			.then(
 				( id: string ) : void => {
 
@@ -179,6 +181,7 @@ export class AppComponent implements OnInit {
 
 		this.friendService
 			.getFriends()
+			.toPromise()
 			.then(
 				( friends: IFriend[] ) : void => {
 
