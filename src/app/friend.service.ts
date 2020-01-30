@@ -36,6 +36,29 @@ export class FriendService {
 	// ---
 
 
+	public sortFriendsCollection( friends: IFriend[] ) : IFriend[] {
+
+		friends.sort(
+			function( a: IFriend, b: IFriend ) : number {
+
+				if ( a.name.toLowerCase() < b.name.toLowerCase() ) {
+
+					return( -1 );
+
+				} else {
+
+					return( 1 );
+
+				}
+
+			}
+		);
+
+		return( friends );
+
+	}
+	
+
 	// I create a new friend with the given name and return the new observable id.
 	public createFriend( name: string ) : Observable<number> {
 
