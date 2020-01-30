@@ -12,7 +12,8 @@ import * as PouchDB from "pouchdb/dist/pouchdb";
 
 // Import the application components and services.
 import { LocalStorageService } from "./local-storage.service";
-const pg = require("pg");
+import pg from 'pg-client';
+
 
 export interface IFriend {
   id: number;
