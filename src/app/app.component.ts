@@ -6,6 +6,8 @@ import { OnInit } from "@angular/core";
 import { FriendService } from "./friend.service";
 import { IFriend } from "./friend.service";
 
+import {Play} from "./play"
+
 import "rxjs/add/operator/toPromise";
 
 interface IEditForm {
@@ -28,6 +30,23 @@ interface IAddForm {
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit {
+
+  model = new Play("Testing", 'Dr IQ', 'add',12);
+
+  
+
+
+  submitted = false;
+
+  onSubmit() { this.submitted = true;
+    console.log(this.model);
+  
+  }
+  
+
+  get diagnostic() { return JSON.stringify(this.model); }
+  
+  
   public addForm: IAddForm;
   public editForm: IEditForm;
 
@@ -46,6 +65,13 @@ export class AppComponent implements OnInit {
 
   // I initialize the component.
   constructor(friendService: FriendService) {
+
+    console.log("model");
+  console.log(this.model);
+
+  
+
+  
     this.friendService = friendService;
 
     this.addForm = {
@@ -57,6 +83,9 @@ export class AppComponent implements OnInit {
     };
     this.friends = [];
   }
+
+   
+  
 
   // ---
   // PUBLIC METHODS.
@@ -91,6 +120,9 @@ export class AppComponent implements OnInit {
       this.editForm.name = friend.name;
     }
   }
+
+
+  
 
   // I get called once after the component has been initialized and the inputs have
   // been bound for the first time.
