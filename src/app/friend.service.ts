@@ -12,7 +12,6 @@ import * as PouchDB from "pouchdb/dist/pouchdb";
 
 // Import the application components and services.
 import { LocalStorageService } from "./local-storage.service";
- 
 
 export interface IFriend {
   id: number;
@@ -61,8 +60,7 @@ interface IPouchDBGetFriendResult extends IPouchDBGetResult {
 export class FriendService {
   private localStorageService: LocalStorageService;
   private pouch: any;
-private pg;
-   
+  private pg;
 
   private client = null;
 
@@ -73,7 +71,8 @@ private pg;
 	user: 'postgres',
 	password: 'password',
   });
- */ 
+ */
+
   // I initialize the friend service.
   constructor(localStorageService: LocalStorageService) {
     this.localStorageService = localStorageService;
@@ -88,14 +87,13 @@ private pg;
   }
 
   replicate() {
-
-	this.client.connect(err => {
-		if (err) {
-		  console.error('connection error', err.stack)
-		} else {
-		  console.log('connected')
-		}
-	  })
+    this.client.connect(err => {
+      if (err) {
+        console.error("connection error", err.stack);
+      } else {
+        console.log("connected");
+      }
+    });
 
     this.pouch.replicate
       .to(this.client)
@@ -162,36 +160,15 @@ private pg;
   }
 
   // I remove the friend with the given id. Returns an observable confirmation.
-  public removeFriend(id: number){
-    let frisends = this.load_Friends()
-    .then(
-      res=>{
-        
-       var friendIndex =  res.findIndex((item:IFriend): boolean =>{
-          return item.id === id;
-        });
-        if (friendIndex >= 0) {
-          frisends = frisends.slice();
-          frisends.splice(friendIndex, 1);
-
-          this.pouch.setItem("friends",frisends)
-    
-          // this.localStorageService.setItem("friends", frisends);
-    
-          return Observable.of(null);
-        } else {
-          return Observable.throw(new Error("Not Found"));
-        }
-
-      }
-
-
-      
-    );
-
-
-    
-/*
+  public removeFriend(id: number) {
+    let frisends = this.load_Friends().then(res => {
+      console.log("peoeoeoeoeo");
+      console.log(res);
+      res.findIndex((item: IFriend): boolean => {
+        return item.id === id;
+      });
+    });
+    /*
   let  friends = this.loadFriends()
     var friendIndex = friends.findIndex((item: IFriend): boolean => {
       return item.id === id;
@@ -208,7 +185,6 @@ private pg;
       return Observable.throw(new Error("Not Found"));
     }
 */
-
   }
 
   // ---
