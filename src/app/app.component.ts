@@ -6,9 +6,11 @@ import { OnInit } from "@angular/core";
 import { FriendService } from "./friend.service";
 import { IFriend } from "./friend.service";
 
-import {Play} from "./play"
+import {Play} from "./play";
+
 
 import "rxjs/add/operator/toPromise";
+import { FormControl } from '@angular/forms';
 
 interface IEditForm {
   id: number;
@@ -31,8 +33,9 @@ interface IAddForm {
 })
 export class AppComponent implements OnInit {
 
-  model = new Play("Testing", 'Dr IQ', 'add',12);
+  model = new Play("Testing", 'Dr IQ', 'add',12,"");
 
+  bing = new FormControl('');
   
 
 
@@ -43,10 +46,14 @@ export class AppComponent implements OnInit {
   
   }
   
+  updateBing(value){
+     console.log(value);
+     this.model.bing = value;
+  }
 
   get diagnostic() { return JSON.stringify(this.model); }
   
-  
+
   public addForm: IAddForm;
   public editForm: IEditForm;
 

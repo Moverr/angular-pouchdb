@@ -1,5 +1,11 @@
 <div class="container">
 
+
+    
+
+
+
+    
     <div class="col-md-6">
         {{diagnostic}}
         <h1> Simple Form </h1>
@@ -16,6 +22,26 @@
         </div>
 
             </div>
+
+
+            
+    <div class="form-group">
+
+        <label>Bing</label>
+        <input class="form-control" (change)="updateBing(bing.value)" type="text" required   [formControl]="bing"/>
+ 
+        <div [hidden]="bing.valid || bing.pristine"
+     class="alert alert-danger">
+  Bing is required
+</div>
+
+    </div>
+
+    
+
+
+
+
 
 
 
