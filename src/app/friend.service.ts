@@ -166,13 +166,31 @@ private pg;
     let frisends = this.load_Friends()
     .then(
       res=>{
-        console.log("peoeoeoeoeo")  
-        console.log(res);
-        res.findIndex((item:IFriend): boolean =>{
+        
+       var friendIndex =  res.findIndex((item:IFriend): boolean =>{
           return item.id === id;
-        })
+        });
+        if (friendIndex >= 0) {
+          frisends = frisends.slice();
+          frisends.splice(friendIndex, 1);
+
+          this.pouch.setItem("friends",frisends)
+    
+          // this.localStorageService.setItem("friends", frisends);
+    
+          return Observable.of(null);
+        } else {
+          return Observable.throw(new Error("Not Found"));
+        }
+
       }
+
+
+      
     );
+
+
+    
 /*
   let  friends = this.loadFriends()
     var friendIndex = friends.findIndex((item: IFriend): boolean => {
