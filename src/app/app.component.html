@@ -1,33 +1,56 @@
-<h1> Simple Form </h1>
-<form>
-    <label>Firstname</label>
-     <input type="text" />
-     <label>Last Name</label>
-     <input type="text" />
-     <label>Gender</label>
-     <select>
-         <option> Male</option>
-         <option> Female</option>
-     </select>
+<div class="container">
 
-     <label> Age </label>
-     <select> 
-         <option>0-5</option>
-     </select>
-</form>
+    <div class="col-md-6">
 
+        <h1> Simple Form </h1>
+        <form>
+
+            <div class="form-group">
+
+                <label>Firstname</label>
+                <input class="form-control" type="text" />
+            </div>
+
+
+
+
+
+            <div class="form-group">
+                <label>Last Name</label>
+                <input class="form-control" type="text" />
+            </div>
+
+            <div class="form-group">
+                <label>Gender</label>
+                <select class="form-control">
+                    <option> Male</option>
+                    <option> Female</option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label> Age </label>
+                <select class="form-control">
+                    <option>0-5</option>
+                </select>
+            </div>
+        </form>
+
+    </div>
+</div>
 <h1> INTERSTING </h1>
 <style>
-a{
-    font-size: 15px;
-    cursor: pointer;
-    color:blue;
-    letter-spacing: 2px;  
-}
+    a {
+        font-size: 15px;
+        cursor: pointer;
+        color: blue;
+        letter-spacing: 2px;
+    }
 </style>
 MOVE
 <table>
-    
+
     <tr *ngFor="let day of week_days">
         <td>
             {{day.name}}
@@ -37,26 +60,20 @@ MOVE
     </tr>
 </table>
 <ul>
-    <li 
-        *ngFor="let friend of friends"
-        [class.selected]="( editForm.id === friend.id )">
+    <li *ngFor="let friend of friends" [class.selected]="( editForm.id === friend.id )">
 
-        {{ friend.name }} 
-         &nbsp;
-         &nbsp;
-         &nbsp;
+        {{ friend.name }}
+        &nbsp;
+        &nbsp;
+        &nbsp;
 
         <a (click)="editFriend( friend )">Edit</a> or
         <a (click)="deleteFriend( friend )">Delete</a>
 
         <div *ngIf="( editForm.id === friend.id )" class="form">
 
-            <input 
-                type="text"
-                [value]="editForm.name"
-                (input)="editForm.name = $event.target.value"
-                (keydown.Enter)="processEditForm()" 
-            />
+            <input type="text" [value]="editForm.name" (input)="editForm.name = $event.target.value"
+                (keydown.Enter)="processEditForm()" />
             <button type="button" (click)="processEditForm()">Update Friend</button>
 
         </div>
@@ -65,12 +82,8 @@ MOVE
 
 <div class="form">
 
-    <input 
-        type="text"
-        [value]="addForm.name"
-        (input)="addForm.name = $event.target.value"
-        (keydown.Enter)="processAddForm()" 
-    />
+    <input type="text" [value]="addForm.name" (input)="addForm.name = $event.target.value"
+        (keydown.Enter)="processAddForm()" />
     <button type="button" (click)="processAddForm()">Add Friend</button>
 
 </div>
