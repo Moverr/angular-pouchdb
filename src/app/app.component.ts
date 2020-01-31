@@ -30,7 +30,17 @@ interface IAddForm {
 export class AppComponent implements OnInit {
   public addForm: IAddForm;
   public editForm: IEditForm;
+
   public friends: IFriend[];
+  public week_days = [
+    {id:1,name:"Monday"}
+    ,{id:2,name:"Tuesday"}
+    ,{id:3,name:"Wednesday"}
+    ,{id:4,name:"Thursday"}
+    ,{id:5,name:"Friday"}
+    ,{id:6,name:"Saturday"}
+    ,{id:7,name:"Sunday"} 
+  ]
 
   private friendService: FriendService;
 
@@ -70,6 +80,7 @@ export class AppComponent implements OnInit {
 
   // I toggle the edit form for the given friend.
   public editFriend(friend: IFriend): void {
+     
     // If the method is being called for the already-selected friend, then let's
     // toggle the form closed.
     if (this.editForm.id === friend.id) {

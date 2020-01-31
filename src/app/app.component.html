@@ -1,3 +1,21 @@
+<h1> Simple Form </h1>
+<form>
+    <label>Firstname</label>
+     <input type="text" />
+     <label>Last Name</label>
+     <input type="text" />
+     <label>Gender</label>
+     <select>
+         <option> Male</option>
+         <option> Female</option>
+     </select>
+
+     <label> Age </label>
+     <select> 
+         <option>0-5</option>
+     </select>
+</form>
+
 <h1> INTERSTING </h1>
 <style>
 a{
@@ -7,12 +25,26 @@ a{
     letter-spacing: 2px;  
 }
 </style>
+MOVE
+<table>
+    
+    <tr *ngFor="let day of week_days">
+        <td>
+            {{day.name}}
+
+        </td>
+
+    </tr>
+</table>
 <ul>
     <li 
         *ngFor="let friend of friends"
         [class.selected]="( editForm.id === friend.id )">
 
-        {{ friend.name }} &mdash;
+        {{ friend.name }} 
+         &nbsp;
+         &nbsp;
+         &nbsp;
 
         <a (click)="editFriend( friend )">Edit</a> or
         <a (click)="deleteFriend( friend )">Delete</a>
