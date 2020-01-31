@@ -64,12 +64,16 @@ export class FriendService {
 private pg;
    
 
-  private client = new pg({
+  private client = null;
+
+  /*
+  new pg({
 	host: 'http://localhost',
 	port: 5432,
 	user: 'postgres',
 	password: 'password',
   });
+ */ 
   // I initialize the friend service.
   constructor(localStorageService: LocalStorageService) {
     this.localStorageService = localStorageService;
@@ -158,8 +162,19 @@ private pg;
   }
 
   // I remove the friend with the given id. Returns an observable confirmation.
-  public removeFriend(id: number): Observable<void> {
-    var friends = this.loadFriends();
+  public removeFriend(id: number){
+    let frisends = this.load_Friends()
+    .then(
+      res=>{
+        console.log("peoeoeoeoeo")  
+        console.log(res);
+        res.findIndex((item:IFriend): boolean =>{
+          return item.id === id;
+        })
+      }
+    );
+/*
+  let  friends = this.loadFriends()
     var friendIndex = friends.findIndex((item: IFriend): boolean => {
       return item.id === id;
     });
@@ -174,6 +189,8 @@ private pg;
     } else {
       return Observable.throw(new Error("Not Found"));
     }
+*/
+
   }
 
   // ---

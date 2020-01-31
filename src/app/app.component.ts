@@ -54,9 +54,10 @@ export class AppComponent implements OnInit {
 
   // I delete the given friend from the list.
   public deleteFriend(friend: IFriend): void {
-    this.friendService
-      .removeFriend(friend.id)
-      .toPromise()
+    this.friendService.removeFriend(friend.id);
+    this.loadF_riends();
+       
+    /*
       .then(
         (): void => {
           this.loadFriends();
@@ -64,7 +65,7 @@ export class AppComponent implements OnInit {
         (error: Error): void => {
           console.log("Error:", error);
         }
-      );
+      ); */
   }
 
   // I toggle the edit form for the given friend.
